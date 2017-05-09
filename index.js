@@ -6,8 +6,8 @@ var fs = require('fs'),
 var port = 443;
 
 var options = {
-    key: fs.readFileSync('/home/dev/testing/archive/ssww1.xyz/privkey1.pem'),
-    cert: fs.readFileSync('/home/dev/testing/archive/ssww1.xyz/cert1.pem'),
+    key: fs.readFileSync('./keys/server.key'),
+    cert: fs.readFileSync('./keys/server.crt'),
 };
 
 

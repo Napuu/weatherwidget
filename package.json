@@ -1,0 +1,15 @@
+{
+  "name": "weatherwidget",
+  "version": "1.0.0",
+  "description": "fetching observations and forecasts from fmi api and doing something nice with them",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git:Napuu/weatherwidget.git"
+  },
+  "author": "",
+  "license": "ISC"
+}

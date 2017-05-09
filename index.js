@@ -13,4 +13,5 @@ app.get("/", function(req, res) {
 }); 
 app.get("/m", function (req, res) {
 	res.sendfile(__dirname + "/lib/view/main.html");
+	console.log("main.html");
 });

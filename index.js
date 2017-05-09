@@ -1,24 +1,16 @@
-var fs = require('fs'),
-    http = require('http'),
-    https = require('https'),
-    express = require('express');
+fs = require('fs')
+options = {
+	key: fs.readFileSync('./keys/server.key'),
+	cert: fs.readFileSync('./keys/server.crt')
+} 
 
-var port = 443;
-
-var options = {
-    key: fs.readFileSync('./keys/server.key'),
-    cert: fs.readFileSync('./keys/server.crt'),
-};
-
-
-var app = express();
-
-var server = https.createServer(options, app).listen(port, function(){
-  console.log("Express server listening on port " + port);
-});
-
-app.get('/', function (req, res) {
-    res.writeHead(200);
-    console.log("ayyyyy");
-    res.end("ayy");
+app = require('express.io')()
+app.https(options).io()
+app.listen(1443)
+app.get("/", function(req, res) {
+	res.write("tset\n");
+	res.end("moi");
+}); 
+app.get("/m", function (req, res) {
+	res.sendfile(__dirname + "/lib/view/main.html");
 });

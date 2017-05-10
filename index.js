@@ -1,17 +1,16 @@
-fs = require('fs')
+fs = require('fs');
 options = {
 	key: fs.readFileSync('./keys/server.key'),
 	cert: fs.readFileSync('./keys/server.crt')
 } 
+var express = require('express');
+var https = require('https');
+var http = require('http');
+var app = express();
 
-app = require('express.io')()
-app.https(options).io()
-app.listen(1443)
-app.get("/", function(req, res) {
-	res.write("tset\n");
+//http.createServer(app).listen(8080);
+https.createServer(options, app).listen(1443);
+app.get("/", function (req, res) {
+	res.sendFile(__pathname
 	res.end("moi");
-}); 
-app.get("/m", function (req, res) {
-	res.sendfile(__dirname + "/lib/view/main.html");
-	console.log("main.html");
 });

@@ -1,4 +1,6 @@
 fs = require('fs');
+var path = require("path");
+global.appRoot = path.resolve(__dirname);
 options = {
 	key: fs.readFileSync('./keys/server.key'),
 	cert: fs.readFileSync('./keys/server.crt')
@@ -10,7 +12,6 @@ var app = express();
 
 //http.createServer(app).listen(8080);
 https.createServer(options, app).listen(1443);
-app.get("/", function (req, res) {
-	res.sendFile(__pathname
-	res.end("moi");
-});
+var router = require(__dirname + "/lib/routing/router");
+router.init(app);
+

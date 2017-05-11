@@ -11,5 +11,8 @@
     "url": "git@git:Napuu/weatherwidget.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "pug": "^2.0.0-rc.1"
+  }
 }

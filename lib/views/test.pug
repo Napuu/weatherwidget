@@ -1,16 +1,13 @@
 doctype html
-html(lang="en")
+html
 	head
 		title= pageTitle
-	script(type='text/javascript').
-		if (foo) bar(1 + 5)
 	body
-		h1 Pug - node template engine
 	#container.col
 		if user=="admin"
 			p hi admin
 		else
-			p moikkamoi
-	p test§
+			p not permitted 
+
 script(type='text/javascript').
 	console.log('tset');

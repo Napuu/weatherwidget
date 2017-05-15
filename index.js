@@ -16,9 +16,6 @@ app.set('views', path.join(__dirname, '/lib/views'));
 http.createServer(app).listen(8080);
 https.createServer(options, app).listen(1443);
 var router = require(__dirname + "/lib/routing/router");
-app.get("/", function (req, res) {
-	res.render("test.pug", {user: "admin"});
-});
 router.init(app);
 var ip = require("ip");
 console.dir ( ip.address() );

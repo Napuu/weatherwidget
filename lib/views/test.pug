@@ -9,5 +9,10 @@ html
 		else
 			p not permitted 
 
+script(src="socket.io/socket.io.js")
 script(type='text/javascript').
 	console.log('tset');
+	//-	var socket = io("https://" + document.domain);
+	var socket = io({secure: true});	
+	socket.emit("ready", {message: "moi"});
+	console.log(document.domain);

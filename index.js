@@ -12,10 +12,25 @@ var http = require('http');
 var app = express();
 app.set("view engine", "pug");
 app.set('views', path.join(__dirname, '/lib/views'));
-
-http.createServer(app).listen(8080);
-https.createServer(options, app).listen(1443);
+var forceSSL = require("express-force-ssl");
+app.use(forceSSL);
+app.set("forceSSLOptions"); 
+var server = http.createServer(app);
+server.listen(8080);
+var secureServer = https.createServer(options, app);
+secureServer.listen(1443);
 var router = require(__dirname + "/lib/routing/router");
 router.init(app);
 var ip = require("ip");
 console.dir ( ip.address() );
+
+var io = require("socket.io")(secureServer);
+io.on('connection', function (socket) {	  
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+	socket.on("ready", function (data) {
+		console.log("täällä ollaa");
+	});	
+});

@@ -1,5 +1,35 @@
 {
-  "name": "weatherwidget",
+ 
+v
+var io = require("socket.io")(secureServer);
+io.on('connection', function (socket) {	  
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+	socket.on("ready", function (data) {
+		console.log("täällä ollaa");
+	});	
+});
+var io = require("socket.io")(secureServer);
+io.on('connection', function (socket) {	  
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+	socket.on("ready", function (data) {
+		console.log("täällä ollaa");
+	});	
+});ar io = require("socket.io")(secureServer);
+io.on('connection', function (socket) {	  
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+	socket.on("ready", function (data) {
+		console.log("täällä ollaa");
+	});	
+}); "name": "weatherwidget",
   "version": "1.0.0",
   "description": "fetching observations and forecasts from fmi api and doing something nice with them",
   "main": "index.js",

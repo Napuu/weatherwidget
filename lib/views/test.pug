@@ -11,8 +11,9 @@ html
 
 script(src="socket.io/socket.io.js")
 script(type='text/javascript').
-	console.log('tset');
 	//-	var socket = io("https://" + document.domain);
 	var socket = io({secure: true});	
-	socket.emit("ready", {message: "moi"});
-	console.log(document.domain);
+	socket.emit("*", {name: "test", message: "moi"});
+	socket.on("answer", function (data) {
+		console.log(data);
+	});

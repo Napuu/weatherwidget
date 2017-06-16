@@ -1,10 +1,16 @@
+doctype html
 html
 	head
+		style
+			include public/css/fetch.css
+
 		title="fetchtest"
 	body
-
-
-script(src="/js/socket.io.js")
+		div(id="pos")
+		button(onclick="test();") nappi
+		button(onclick="test2();") päivitä
+		div(id="map")
+script(src="/socket.io/socket.io.js")
+script(src="/js/jquery.js")
 script(src="/js/fetch.js")
-script().
-	console.log("moi");
+script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkI6BG0xSyp0jSTj3WPxPpHmnw4UOYNmo&callback=initMap")

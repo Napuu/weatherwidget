@@ -3,14 +3,22 @@ html
 	head
 		style
 			include public/css/fetch.css
+			include public/css/magic.css
 
+		link(rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css")
+		
 		title="fetchtest"
 	body
 		div(id="pos")
 		button(onclick="test();") nappi
 		button(onclick="test2();") päivitä
 		div(id="map")
+		input(type="range" min=0 max=1 step=0.001 oninput="muuttu();" id="ranger")
+		div(id="rangeValue") 0.5
+		div(id="rangeColor" width="100px" height="100px")
+		div(class="" id="loadingIndicator")
+script(src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js")
+script(src="/js/util/trig.js")
 script(src="/socket.io/socket.io.js")
 script(src="/js/jquery.js")
 script(src="/js/fetch.js")
-script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkI6BG0xSyp0jSTj3WPxPpHmnw4UOYNmo&callback=initMap")

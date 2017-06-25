@@ -11,3 +11,6 @@
 	top: 0px;
 	right: 0px;
 }
+#li {
+	filter: hue-rotate(90deg);
+}

@@ -1,6 +1,4 @@
 #map {
-	height: 600px;
-	width: 800px;
 }
 #rangeColor {
 	width: 100px;
@@ -13,4 +11,12 @@
 }
 #li {
 	filter: hue-rotate(90deg);
+}
+.popup1 {
+	width: 100px;
+	height: 100px;
+	background: black;
+}
+.hidden {
+	visibility: hidden;
 }

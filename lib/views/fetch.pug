@@ -8,16 +8,16 @@ html
 		link(rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css")
 		
 		title="fetchtest"
-	body
+	body(onload="test2();")
 		div(id="pos")
-		button(onclick="test();") nappi
-		button(onclick="test2();") päivitä
+		button(onclick="test();" class="hidden") nappi
+		button(onclick="test2();") download 
 		div(id="map")
-		input(type="range" min=0 max=1 step=0.001 oninput="muuttu();" id="ranger")
-		div(id="rangeValue") 0.5
-		div(id="rangeColor" width="100px" height="100px")
-		div(class="" id="loadingIndicator")
-		img(src="/graphics/li_icon.png" id="li")
+		input(type="range" min=0 max=1 step=0.001 class="hidden" oninput="muuttu();" id="ranger")
+		div(id="rangeValue" class="hidden") 0.5
+		div(id="rangeColor" width="100px" class="hidden" height="100px")
+		div(class="" id="loadingIndicator" class="hidden")
+		img(src="/graphics/li_icon.png" class="hidden" id="li")
 script(src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js")
 script(src="/js/util/trig.js")
 script(src="/js/util/dateParser.js")

@@ -1,0 +1,158 @@
+console.log("moikkamoi");
+var socket = io();
+//
+//socket.emit("ready", "rad");
+var EmitEvent = {};
+socket.emit("*", {name: "fetch"});
+navigator.geolocation.getCurrentPosition(handleLocation, handleLocationError, {
+	timeout: 15000,
+       	maximumAge: Infinity,
+	enableHighAccuracy: true});
+
+var pos = $("#pos");
+var mapReady = true;
+var salamatReady = false;
+var mymap;
+L_PREFER_CANVAS = true;
+function test() {
+//mapbox key
+	var mapkey = "pk.eyJ1IjoicGFsaWtrIiwiYSI6ImNqNDJ2Z2llNjBvYTkzOW9ibGJwcGMybzkifQ.nSLXiCVvzV_aiRAXchdfRQ";
+	mymap = L.map('map', {renderer: L.canvas()}).setView([61.497129, 23.829673], 13);
+	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+		    maxZoom: 18,
+		    id: 'mapbox.streets',
+		    accessToken: mapkey
+	}).addTo(mymap);
+	socket.emit("*", {name: "fetch", message: "test event"});
+}
+function handleLocation(position) {
+	pos.text(position.coords.latitude + ", " + position.coords.longitude);
+	socket.emit("*", {lat: position.coords.latitude, long: position.coords.longitude, name: "fetch"});
+	console.log(position);
+}
+function handleLocationError(err) {
+	console.log(err);
+	//alert("location error");
+}
+var offset = new Date().getTimezoneOffset();
+console.log(offset);
+var datetest = new Date();
+console.log(datetest.getTime());
+var dateNow = new Date();
+function initMap() {
+	var uluru = {lat: -25.363, lng: 131.044};
+	var finlandCenter = {lat: 61.815477, lng: 25.423249};
+	map = new google.maps.Map(document.getElementById('map'), {
+		  zoom: 6,
+		  center: finlandCenter
+	});
+	var icon = "https://upload.wikimedia.org/wikipedia/commons/c/c7/Lightning_Symbol.svg";	
+	var marker = new google.maps.Marker({
+		position: uluru,
+		map: map
+	});
+	var marker2 = new google.maps.Marker({
+		position: uluru,
+		map: map,
+		icon: "/graphics/li_icon_30.png"
+	});
+	console.log("map ready");
+	mapReady = true;	
+}
+socket.on("flashes", function(data) {
+	salamat = data;
+	console.log("salamat ready");
+	salamatReady = true;
+	trueInit();
+});
+function test2() {
+	$("#loadingIndicator").toggleClass("loading1");		
+	socket.emit("*", {name: "fetch", message: "fetchLightnings"});
+}
+function trueInit() {
+	console.log("nyt lähtee");
+	console.log(salamat.length);
+	var yay = {lat: 61.497610, lng: 23.738371};
+	var lightnings = {};
+	for (i in salamat) {
+		if (salamat[i][0] == undefined) continue;
+
+		console.log(salamat[i][0] + ", " + salamat[i][1]);
+		var degE = degreeEquivalent(1, salamat[i][0]);	
+		var deltaLat = degE.lat; 
+		var deltaLng = degE.lng;
+		var coords1 = [
+			[salamat[i][0] - deltaLat, salamat[i][1] - deltaLng],
+			[salamat[i][0] + deltaLat, salamat[i][1] + deltaLng]
+		];
+		var coords2 = [
+			[salamat[i][0] + deltaLat, salamat[i][1] - deltaLng],
+			[salamat[i][0] - deltaLat, salamat[i][1] + deltaLng]
+		];
+		var timeDiff = (((new Date()).getTime() / 1000) - salamat[i][2]);
+		var opacity = 1 - (0.5 * ((timeDiff - (60*60)) / (23*60*60)));
+		var color = "rgb(255,255,0)";
+		if (timeDiff <= 60*60) {
+			color = "rgb(255, " + parseInt(255 * timeDiff / (60*60)) + ", 0)";		
+			opacity = 1;
+		}
+		console.log(timeDiff / (12*60*60));
+		var circle = new google.maps.Circle({
+			center: {lat: salamat[i][0], lng: salamat[i][1]},
+			map: map,
+			strokeColor: '#000',
+		      	strokeOpacity: 0.8,
+			strokeWeight: 0.2,
+			fillColor: color,
+			fillOpacity: opacity,
+			radius: 2500
+			//icon: "/graphics/li_icon_15.png"
+		});
+		circle.time = salamat[i][2];
+		google.maps.event.addListener(circle, "click", function () {
+			var timeDiff1 = (((new Date()).getTime() / 1000) - this.time);
+			console.log(timeDiff1 / (60*60*12));
+			console.log(parseSecondsToDate(timeDiff1));
+		});	
+	}
+	/*
+	map.data.loadGeoJson("/jsontest.json");
+	map.data.setStyle(function (feature) {
+		return {
+			icon: {
+				path: google.maps.SymbolPath.CIRCLE,
+				scaledSize: new google.maps.Size(13, 30),
+				opacity: 0.5
+			}
+		}
+	});
+	*/
+	console.log("salamoita " + salamat.length + " kpl viimeisen 24h sisään");
+	$("#loadingIndicator").toggleClass("loading1");		
+}
+var range = document.getElementById("ranger");
+var rangeColor = document.getElementById("rangeColor");
+function muuttu() {
+	console.log(range.value);
+	//seuraava on sellane transition punasesta harmaaks (saturation -> 0)
+	/*
+	var red = 128 + parseInt(128 * range.value);
+	var green = parseInt(128 * (1 - range.value));
+	var blue = parseInt(128 * (1 - range.value));
+	var col = "rgb(" + makeTwo(red) + ", " + makeTwo(green) + ", " + makeTwo(blue) + ")";
+	console.log(col);
+	*/
+	var col = "rgba(255, " + parseInt(255*range.value) + ", 0, 1)";
+	$("#rangeColor").css("background", col);
+	$("#li").css("filter", "hue-rotate(" + (360*range.value) + "deg)");
+}
+function makeTwo(num) {
+	var ret = num;
+	if (num < 10) {
+		ret = "0" + num;
+	} if (num < 100) {
+		ret = "0" + ret;
+	}
+	return num;
+}

@@ -8,10 +8,10 @@ html
 		link(rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css")
 		
 		title="fetchtest"
-	body(onload="test2();")
+	body(onload="//updateMap();")
 		div(id="pos")
 		button(onclick="test();" class="hidden") nappi
-		button(onclick="test2();") download 
+		button(onclick="updateMap();") download 
 		div(id="map")
 		input(type="range" min=0 max=1 step=0.001 class="hidden" oninput="muuttu();" id="ranger")
 		div(id="rangeValue" class="hidden") 0.5

@@ -1,0 +1,11 @@
+html
+	head
+		title("test")
+	body
+		- var test = Math.random();
+		p=test
+		div(id="offset") 0
+		div(id="map" style={height: "100%"})
+		script(src="/socket.io/socket.io.js")
+		script(src="/js/radar.js")
+		script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBej9fCwuETi14G6kfLYbQVo-WNahaskqI&callback=initMap")

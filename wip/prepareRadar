@@ -1,0 +1,48 @@
+#!/bin/bash
+
+
+#ttime ja layers sen sijaan vaihtelee riippuen siitä mitä halutaan
+
+
+#71, 16
+#59, 33
+if [ -z $1]
+then
+	echo "Error - No parameters found"
+	exit 1
+fi
+layers="Radar:suomi_$1_eureffin"
+
+
+#minx=10.215546158022443
+#miny=56.751319918431086
+#maxx=37.371658784549375 
+#maxy=71.24172567165043
+#http://spatialreference.org/ref/epsg/etrs89-etrs-tm35fin/
+#bbox includes projection
+bbox="56,16,70,37&srs=EPSG:4055"
+
+
+#ttime="2017-12-16T11:00:00Z"
+ttime=$2
+width=2649
+height=4192
+
+request="wms.fmi.fi/fmi-apikey/c032f648-f04d-48b7-95e5-af7541906622/geoserver/Radar/wms?service=WMS&version=1.3.0&request=GetMap&layers=$layers&bbox=$bbox&format=image%2Fpng&time=$ttime&width=$width&height=$height"
+#request="http://wms.fmi.fi/fmi-apikey/c032f648-f04d-48b7-95e5-af7541906622/geoserver/Radar/wms?service=WMS&version=1.3.0&request=GetMap&layers=Radar:suomi_rr1h_eureffin&bbox=56,16,70,37&srs=EPSG:4055&format=image%2Fpng&time=2017-12-16T11:00:00Z&width=3974&height=6288"
+
+fileName="$1_$2.png"
+
+if [ ! -d "$1" ]; then
+	mkdir ./$1
+fi
+
+echo $request
+wget $request -O .temp.png
+
+convert .temp.png -fill white -stroke white -draw "rectangle 0,0 $width,100" -fill white -stroke white -draw "rectangle 0,3900 $width,$height" -fill white -stroke white -draw "rectangle 0,0 100,4192" -fill white -stroke white -draw "rectangle 2000,0 2649,$height" .temp.png 
+convert .temp.png -fuzz 2% -transparent white -transparent "#F7F7F7" $fileName
+#cp .temp.png noniii.png
+rm .temp.png
+mv -f $fileName ./$1
+#mv -f $fileName /home/v510p/projects/weatherwidget/lib/views/public/graphics/$fileName

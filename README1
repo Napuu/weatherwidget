@@ -1,0 +1,5 @@
+before using you gotta do what ./notes say
+then run "node index.js"
+
+lightningmap is at https://localhost/fetch
+might need directly to port 1443/443

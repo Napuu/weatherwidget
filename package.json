@@ -1,35 +1,5 @@
 {
- 
-v
-var io = require("socket.io")(secureServer);
-io.on('connection', function (socket) {	  
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
-		console.log(data);
-	});
-	socket.on("ready", function (data) {
-		console.log("täällä ollaa");
-	});	
-});
-var io = require("socket.io")(secureServer);
-io.on('connection', function (socket) {	  
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
-		console.log(data);
-	});
-	socket.on("ready", function (data) {
-		console.log("täällä ollaa");
-	});	
-});ar io = require("socket.io")(secureServer);
-io.on('connection', function (socket) {	  
-	socket.emit('news', { hello: 'world' });
-	socket.on('my other event', function (data) {
-		console.log(data);
-	});
-	socket.on("ready", function (data) {
-		console.log("täällä ollaa");
-	});	
-}); "name": "weatherwidget",
+  "name": "weatherwidget",
   "version": "1.0.0",
   "description": "fetching observations and forecasts from fmi api and doing something nice with them",
   "main": "index.js",
@@ -43,6 +13,35 @@ io.on('connection', function (socket) {
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "pug": "^2.0.0-rc.1"
+    "accepts": "^1.3.5",
+    "array-flatten": "^2.1.1",
+    "content-disposition": "^0.5.2",
+    "content-type": "^1.0.4",
+    "cookie": "^0.3.1",
+    "cookie-signature": "^1.1.0",
+    "depd": "^1.1.2",
+    "destroy": "^1.0.4",
+    "etag": "^1.8.1",
+    "express-force-ssl": "^0.3.2",
+    "finalhandler": "^1.1.1",
+    "fresh": "^0.5.2",
+    "geojson": "^0.5.0",
+    "http-errors": "^1.6.3",
+    "ip": "^1.1.5",
+    "merge-descriptors": "^1.0.1",
+    "methods": "^1.1.2",
+    "npm-install-all": "^1.1.21",
+    "path-to-regexp": "^2.2.1",
+    "proxy-addr": "^2.0.3",
+    "pug": "^2.0.0-rc.1",
+    "qs": "^6.5.2",
+    "range-parser": "^1.2.0",
+    "request": "^2.85.0",
+    "setprototypeof": "^1.1.0",
+    "socket.io": "^2.1.0",
+    "type-is": "^1.6.16",
+    "utils-merge": "^1.0.1",
+    "vary": "^1.1.2",
+    "xml-parser": "^1.2.1"
   }
 }

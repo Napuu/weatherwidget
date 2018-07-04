@@ -16,3 +16,44 @@
 	animation-direction: alternate;
 	animation-timing-function: linear;
 }
+.loader {
+	width: 100px;
+	height: 100px;
+	background-color: #EEE;
+	position: absolute;
+	top: 100px;
+	border-radius: 70px;
+	border: solid 15px black;
+	right: 100px;
+	
+	animation-name: loadThing;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+.loader > div {
+	width: 115px;
+	height: 57.5;
+	background-color: #EEE;
+	position: relative;
+	bottom: 0px;
+}
+	
+@keyframes loadThing{
+	0% {
+		transform: rotate(0deg);
+	}
+	25% {
+		transform: rotate(90deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	75% {
+		transform: rotate(270deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}	
+}
+	

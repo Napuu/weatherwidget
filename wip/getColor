@@ -1,0 +1,1 @@
+convert $1 -crop 10000x1+0+0 -depth 8 txt:|grep -v -m2 grey97|grep -Eoh "#[^ ]{6}"

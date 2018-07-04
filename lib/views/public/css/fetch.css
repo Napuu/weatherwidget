@@ -4,11 +4,7 @@
 	width: 100px;
 	height: 100px;
 }
-#loadingIndicator {
-	position: absolute;
-	top: 0px;
-	right: 0px;
-}
+
 #li {
 	filter: hue-rotate(90deg);
 }

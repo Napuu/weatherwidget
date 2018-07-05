@@ -6,7 +6,7 @@ Right now app only uses data from lightning strikes and shows them on the map.
 </p>
 
 <p>
-Screenshot from ligthings-view below<br>
+Screenshot from lightnings-view below<br>
 <img src="screenshot_lightning.png" width=450></img>
 <br>
 Map shows lightning strikes from last 12h. Data is from FMI (Finnish Meteorological Institute), so only strikes near Finland are shown.

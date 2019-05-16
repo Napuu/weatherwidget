@@ -13,6 +13,4 @@ Map shows lightning strikes from last 12h. Data is from FMI (Finnish Meteorologi
 Clicking specific strike shows how far away it happened from your current location, and time.
 Color of the strike indicates how long age it happened. In one hour color fades from red to yellow. More than hour old strikes are yellow.
 </p>
-<p>
-<a target="_blank" rel="noopener noreferrer" href="https://napuu.xyz:1443/fetch">Live-demo</a> (browser will warn about SSL certificate since it's self-signed)
-</p>
+
